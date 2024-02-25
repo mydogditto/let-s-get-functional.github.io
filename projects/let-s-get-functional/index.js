@@ -22,24 +22,95 @@ var _ = require('underbar');
  */
 
 var maleCount = function(array) {
+// set the result of filter to a variable 
+    let males = _.filter(array, function(customer){
+        // filter is creating an array this step fills the array with all the mals
+        // in the object
+        return customer.gender === 'male';
+    });
+    // since we're dealing with an array we can use .length to count
+    return males.length
+    };
 
+
+var femaleCount = function(array){
+    // use reduce to count the number of female customers
+    let result = _.reduce(array, function(accum, current){
+// if the current gender = female 
+ if(current.gender === "female"){
+ // then incrament the accumulater 
+ accum++
+ }
+return accum
+    },0)
+    return result
 };
 
-var femaleCount;
+var oldestCustomer = function(array){
+    let oldest = _.reduce(array, function(accumulator, current){
+        if (current.age > accumulator.age){
+            return current;
+            } else {
+            return accumulator;
+            }
+    })
+    return oldest.name;
+};
 
-var oldestCustomer;
+var youngestCustomer = function(array){
+    let youngest = _.reduce(array, function(accumulator, current){
+        if (current.age > accumulator.age){
+            return accumulator;
+            } else {
+            return current ;
+            }
+    
+    })
+    return youngest.name;
+}
+var averageBalance = function(array){
+    let balance = _.reduce(array, function(accumulator, current){
+        let totalBalance = current.balance.replace(/[$, ,]/g, "");
+     let newNumbers = parseFloat(totalBalance);
+    return newNumbers + accumulator;
+    }, 0)
+    return  balance / array.length
+    };
+    
 
-var youngestCustomer;
+var firstLetterCount = function(array){
+    let friendLetter = _.filter(array, function(customer){
+        if (customer.name[0].toUpperCase() === letter.toUpperCase()){
+            return customer.name
+        }
+    })
+    return friendLetter.length
+};
 
-var averageBalance;
+var friendFirstLetterCount = function(array, customer, letter){
+     //create a variable to store the count
+ var count = 0;
+ //create a variable to store the customer's friends
+ var friends = array.filter(function(cust){
+   return cust.name === customer;
+ })[0].friends;
+ //iterate through the friends array
+ friends.forEach(function(friend){
+   //if the first letter of the friend's name is equal to the letter
+   if(friend.name[0].toUpperCase() === letter.toUpperCase()){
+     //increment the count
+     count++;
+   }
+ })
+ //return the count
+ return count;
 
-var firstLetterCount;
+}
 
-var friendFirstLetterCount;
 
-var friendsCount;
+var friendsCount = function(){};
 
-var topThreeTags;
+var topThreeTags = function(){};
 
 var genderCount;
 
